@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.5
-Release:        3.12%{?dist}
+Release:        3.13%{?dist}
 Epoch:          0
 Summary:        XML Graphics Commons
 
@@ -40,7 +40,7 @@ Summary:        Javadoc for %{pkg_name}
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 rm -f `find . -name "*.jar"`
 
@@ -51,7 +51,7 @@ sed "s:@version@:%{version}:g" %{pkg_name}-pom-template.pom \
 
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 export CLASSPATH=$(build-classpath commons-logging)
 export OPT_JAR_LIST="ant/ant-junit junit"
@@ -62,7 +62,7 @@ ant package javadocs
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 install -d -m 755 $RPM_BUILD_ROOT%{_mavenpomdir}
 install -Dpm 0644 build/%{pkg_name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{pkg_name}.jar
@@ -82,6 +82,9 @@ cp -pr build/javadocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:1.5-3.13
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:1.5-3.12
 - maven33 rebuild
 
