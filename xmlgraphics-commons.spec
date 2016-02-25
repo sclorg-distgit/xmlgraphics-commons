@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.5
-Release:        3.13%{?dist}
+Release:        3.14%{?dist}
 Epoch:          0
 Summary:        XML Graphics Commons
 
@@ -82,6 +82,9 @@ cp -pr build/javadocs/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 0:1.5-3.14
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:1.5-3.13
 - maven33 rebuild #2
 
